@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Multi-Agent AI Workflow System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Application Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <div class="brand-title">Autonomous Multi-Agent <span>AI Workflow</span></div>
+        <div class="brand-subtitle">Orchestration • Controlled Tools • Multi-Tier Verification • Self-Healing Retries</div>
+      </div>
+    </div>
+    <div class="header-status-group">
+      <span class="status-badge">
+        <span class="dot"></span>
+        <span id="header-status-text">System Operational</span>
+      </span>
+      <span class="meta-metric">Agents: <strong id="header-agents-count">4</strong></span>
+      <span class="meta-metric">Tools: <strong id="header-tools-count">11</strong></span>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs">
+    <button class="nav-tab-btn active" data-tab="tab-studio">
+      <span>⚡</span> Workflow Studio
+    </button>
+    <button class="nav-tab-btn" data-tab="tab-evaluation">
+      <span>📊</span> System Evaluation & Benchmarks
+    </button>
+    <button class="nav-tab-btn" data-tab="tab-architecture">
+      <span>🛡️</span> Agent Architecture & Tool Permissions
+    </button>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <main class="main-content">
+
+    <!-- ==========================================
+         TAB 1: WORKFLOW STUDIO
+         ========================================== -->
+    <section id="tab-studio" class="tab-pane active">
+
+      <!-- Main Focus Area: Task Ingestion & Launch -->
+      <div class="workflow-focus-card">
+        <!-- Compact Quick Scenarios (Optional, unobtrusive) -->
+        <div class="quick-pills-row">
+          <span class="quick-pills-label">Quick Scenarios:</span>
+          <button class="pill-btn" data-prompt="Conduct a comprehensive financial analysis of AAPL, NVDA, and MSFT. Calculate YoY revenue growth, profit margin percentages, and P/E ratio differentials, verify all financial boundaries, and synthesize an executive valuation report.">
+            📈 Tech Financials
+          </button>
+          <button class="pill-btn" data-prompt="Benchmark PostgreSQL, MongoDB, and Redis performance metrics. Calculate IOPS speedup factors, evaluate p99 latency trade-offs, verify non-negative constraints, and produce an architecture selection verdict.">
+            🗄️ Database Benchmarks
+          </button>
+          <button class="pill-btn" data-prompt="Analyze 2016-2024 global temperature anomaly time series and CO2 concentration metrics. Calculate mean anomaly, standard deviation, and decadal warming rate via linear regression, verify physical reality bounds, and summarize climate trajectory.">
+            🌍 Climate Trends
+          </button>
+          <button class="pill-btn" data-prompt="Audit critical enterprise dependencies (xz-utils, runc, jenkins-core) for active CVE vulnerabilities. Calculate mean CVSS risk score, prioritize patch order by severity, verify score bounds against CVSS 3.1 standards, and generate remediation roadmap.">
+            🛡️ CVE Security Audit
+          </button>
+          <button class="pill-btn" data-prompt="Process raw sales transaction records. Filter out cancelled orders, compute post-discount net revenue per transaction, aggregate net revenue by customer tier (Enterprise vs Pro), verify JSON schema compliance, and output audited totals.">
+            💼 Sales Pipeline
+          </button>
+        </div>
+
+        <!-- Task Input Textarea -->
+        <textarea id="workflow-prompt" class="prompt-textarea" placeholder="Enter a complex multi-step user request to be autonomously planned, researched, computed, and verified...">Conduct a comprehensive financial analysis of AAPL, NVDA, and MSFT. Calculate YoY revenue growth, profit margin percentages, and P/E ratio differentials, verify all financial boundaries, and synthesize an executive valuation report.</textarea>
+
+        <!-- Primary Action Bar -->
+        <div class="workflow-action-bar">
+          <button id="launch-btn" class="btn-primary">
+            🚀 Run Multi-Agent Workflow
+          </button>
+        </div>
+
+        <!-- Advanced Testing Collapsible Area -->
+        <details class="advanced-settings-toggle">
+          <summary>⚙️ Advanced Testing: Fault Injection & Autonomous Retries</summary>
+          <div class="advanced-settings-body">
+            <label class="checkbox-label" title="Injects a transient calculation fault during initial computation to test autonomous error catching, backoff, and self-healing retry recovery.">
+              <input type="checkbox" id="simulate-failure-toggle">
+              <span>Simulate Fault & Test Autonomous Retry Recovery (Demonstrates Self-Healing)</span>
+            </label>
+          </div>
+        </details>
+      </div>
+
+      <!-- 4 Compact Agent Status Cards -->
+      <div class="agent-status-grid">
+        <div class="agent-mini-card" id="card-agent-planning">
+          <div class="agent-mini-header">
+            <span class="agent-mini-name">🎯 Planning Agent</span>
+            <span id="agent-state-planning" class="agent-state-pill idle">IDLE</span>
+          </div>
+          <div class="agent-mini-role">Decomposes complex requests into dependency task graphs</div>
+        </div>
+
+        <div class="agent-mini-card" id="card-agent-research">
+          <div class="agent-mini-header">
+            <span class="agent-mini-name">🔍 Research Agent</span>
+            <span id="agent-state-research" class="agent-state-pill idle">IDLE</span>
+          </div>
+          <div class="agent-mini-role">Controlled information retrieval from verified knowledge stores</div>
+        </div>
+
+        <div class="agent-mini-card" id="card-agent-execution">
+          <div class="agent-mini-header">
+            <span class="agent-mini-name">⚙️ Execution Agent</span>
+            <span id="agent-state-execution" class="agent-state-pill idle">IDLE</span>
+          </div>
+          <div class="agent-mini-role">Sandboxed Python modeling and statistical computations</div>
+        </div>
+
+        <div class="agent-mini-card" id="card-agent-verification">
+          <div class="agent-mini-header">
+            <span class="agent-mini-name">🛡️ Verification Agent</span>
+            <span id="agent-state-verification" class="agent-state-pill idle">IDLE</span>
+          </div>
+          <div class="agent-mini-role">Strict JSON schema validation and numerical sanity checks</div>
+        </div>
+      </div>
+
+      <!-- Concise Real-Time Task Execution Monitor -->
+      <div class="progress-status-strip">
+        <div class="strip-status">
+          <span style="font-weight:700;color:var(--color-gold);">Status:</span>
+          <span id="workflow-live-status-text">Ready to run</span>
+        </div>
+        <div style="display:flex;gap:18px;">
+          <span class="strip-metric">Tasks: <strong id="workflow-tasks-count">0 / 0</strong></span>
+          <span class="strip-metric">Retries: <strong id="workflow-retries-count">0</strong></span>
+          <span class="strip-metric">Duration: <strong id="workflow-duration-text">0 ms</strong></span>
+        </div>
+      </div>
+
+      <!-- Compact Task Progression Cards -->
+      <div class="task-list-compact" id="tasks-container">
+        <div style="color:var(--text-muted);font-size:12px;padding:8px 4px;">
+          Click "Run Multi-Agent Workflow" to trigger autonomous decomposition and execution.
+        </div>
+      </div>
+
+      <!-- Final Verified Result Deliverable -->
+      <div class="verified-result-card">
+        <div class="result-card-header">
+          <span class="result-title">📋 Final Report & Verified Deliverable</span>
+          <span id="final-verification-badge" class="verified-stamp">Awaiting Output</span>
+        </div>
+        <div id="final-output-body" class="result-content">
+          <div style="color:var(--text-muted);font-size:12px;">
+            The verified final report synthesized across multi-agent outputs will appear here upon completion of automated verification checks.
+          </div>
+        </div>
+        <div class="result-footer-metrics">
+          <span>Tool Invocations: <strong id="res-metric-tools">0</strong></span>
+          <span>Self-Healing Retries: <strong id="res-metric-retries">0</strong></span>
+          <span>Quality Audit: <strong id="res-metric-status" style="color:var(--status-success);">STANDBY</strong></span>
+        </div>
+      </div>
+
+      <!-- Expandable Deep-Dive Panels (Organized & Uncluttered) -->
+      <details class="expandable-panel" id="panel-agent-comm">
+        <summary>
+          <span>💬 Shared Context & Agent Communication Feed</span>
+          <span style="font-size:11px;color:var(--text-muted);">Expand to inspect inter-agent messages & blackboard</span>
+        </summary>
+        <div class="expandable-content">
+          <div class="compact-message-feed" id="message-feed">
+            <div style="color:var(--text-muted);font-size:12px;">
+              Inter-agent message logs and blackboard mutations stream here during execution.
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="expandable-panel" id="panel-tool-audit">
+        <summary>
+          <span>🔧 Controlled Tool Usage & Permission Audit Log</span>
+          <span style="font-size:11px;color:var(--text-muted);">Expand to inspect RBAC enforcement & latency</span>
+        </summary>
+        <div class="expandable-content" style="padding:0;">
+          <div class="table-scroll-container">
+            <table class="compact-table">
+              <thead>
+                <tr>
+                  <th>Tool Invocated</th>
+                  <th>Calling Agent</th>
+                  <th>Access Permission</th>
+                  <th>Duration</th>
+                  <th>Execution Result</th>
+                </tr>
+              </thead>
+              <tbody id="tool-audit-body">
+                <tr>
+                  <td colspan="5" style="text-align:center;color:var(--text-muted);padding:14px;">
+                    No tool invocations recorded yet. Run a workflow to inspect controlled tool calls.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+    </section>
+
+    <!-- ==========================================
+         TAB 2: SYSTEM EVALUATION & BENCHMARKS
+         ========================================== -->
+    <section id="tab-evaluation" class="tab-pane">
+
+      <!-- Evaluation Status Bar (Clearly distinguishes sample data from actual runs) -->
+      <div class="eval-status-indicator-bar">
+        <div>
+          <span style="font-weight:700;color:var(--color-gold);">Evaluation Telemetry:</span>
+          <span style="font-size:12px;color:var(--text-secondary);margin-left:6px;">Performance metrics derived from multi-step benchmarks</span>
+        </div>
+        <span id="eval-status-badge" class="eval-status-pill awaiting">Status: Awaiting Benchmark Run</span>
+      </div>
+
+      <!-- 5 Compact Performance Metric Cards (Initial state clearly marked until genuinely run) -->
+      <div class="kpi-compact-grid">
+        <div class="kpi-compact-card" id="kpi-card-success">
+          <div class="kpi-compact-title">Success Rate</div>
+          <div class="kpi-compact-value" id="kpi-success-rate">—</div>
+          <div class="kpi-compact-sub" id="kpi-sub-success">Awaiting execution</div>
+        </div>
+        <div class="kpi-compact-card" id="kpi-card-latency">
+          <div class="kpi-compact-title">Average Latency</div>
+          <div class="kpi-compact-value" id="kpi-avg-latency">—</div>
+          <div class="kpi-compact-sub" id="kpi-sub-latency">No runs recorded</div>
+        </div>
+        <div class="kpi-compact-card" id="kpi-card-verification">
+          <div class="kpi-compact-title">Verification Score</div>
+          <div class="kpi-compact-value" id="kpi-verification-score">—</div>
+          <div class="kpi-compact-sub" id="kpi-sub-verification">Schema & sanity score</div>
+        </div>
+        <div class="kpi-compact-card" id="kpi-card-tools">
+          <div class="kpi-compact-title">Tool Invocations</div>
+          <div class="kpi-compact-value" id="kpi-tool-calls">—</div>
+          <div class="kpi-compact-sub" id="kpi-sub-tools">0 recorded</div>
+        </div>
+        <div class="kpi-compact-card" id="kpi-card-resilience">
+          <div class="kpi-compact-title">Fault Resilience</div>
+          <div class="kpi-compact-value" id="kpi-resilience">—</div>
+          <div class="kpi-compact-sub" id="kpi-sub-resilience">Auto-retry recovery</div>
+        </div>
+      </div>
+
+      <!-- Benchmark Actions Card -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">⚡ Multi-Step Real-World Benchmark Scenarios</span>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <label class="checkbox-label" title="Inject transient faults to benchmark self-healing recovery rate">
+              <input type="checkbox" id="eval-fault-tolerance-toggle">
+              <span>Test Resilience (Inject Faults)</span>
+            </label>
+            <button id="run-benchmarks-btn" class="btn-primary">
+              ⚡ Run Full Benchmark Suite
+            </button>
+          </div>
+        </div>
+
+        <!-- Populated dynamically with compact scenario cards & expandable criteria -->
+        <div id="evaluation-scenarios-container">
+          <!-- Populated by evaluationController -->
+        </div>
+      </div>
+
+      <!-- Granular Results Table in Expandable / Scannable View -->
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border-subtle);display:flex;justify-content:space-between;align-items:center;">
+          <span class="card-title" style="margin:0;">📊 Granular Benchmark Telemetry Breakdown</span>
+          <span style="font-size:11px;color:var(--text-muted);">Verified Run Details</span>
+        </div>
+        <div class="table-scroll-container">
+          <table class="compact-table">
+            <thead>
+              <tr>
+                <th>Scenario Name</th>
+                <th>Domain</th>
+                <th>Latency</th>
+                <th>Tasks</th>
+                <th>Tool Calls</th>
+                <th>Retries</th>
+                <th>Verification Score</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody id="eval-table-body">
+              <tr>
+                <td colspan="8" style="text-align:center;color:var(--text-muted);padding:16px;">
+                  Click "Run Full Benchmark Suite" or run an individual scenario above to calculate verified metrics.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==========================================
+         TAB 3: AGENT ARCHITECTURE & TOOL PERMISSIONS
+         ========================================== -->
+    <section id="tab-architecture" class="tab-pane">
+
+      <!-- 4 Required Specialized Agents -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🤖 Specialized Multi-Agent Fleet</span>
+          <span class="card-subtitle">Separation of Concerns & Responsibilities</span>
+        </div>
+        <div class="agent-fleet-grid" id="agents-fleet-container">
+          <!-- Populated dynamically with compact cards & expandable details -->
+        </div>
+      </div>
+
+      <!-- Readable Tool Permissions Matrix -->
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border-subtle);">
+          <span class="card-title" style="margin:0;">🛡️ Controlled Tool Usage & Permission Matrix</span>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">
+            Strict Role-Based Access Control (RBAC) enforced by backend tool registry.
+          </div>
+        </div>
+        <div class="matrix-container">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Tool Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th style="text-align:center;">Planning Agent</th>
+                <th style="text-align:center;">Research Agent</th>
+                <th style="text-align:center;">Execution Agent</th>
+                <th style="text-align:center;">Verification Agent</th>
+              </tr>
+            </thead>
+            <tbody id="matrix-table-body">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Concise Governance Card -->
+      <div class="card" style="margin-top:20px;">
+        <div class="card-header">
+          <span class="card-title">🔒 System Governance & Resilience Principles</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:14px;">
+          <div style="background:var(--bg-surface-elevated);padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);">
+            <div style="font-weight:700;color:var(--color-amber);font-size:12px;margin-bottom:4px;">Controlled Tool Usage</div>
+            <p style="font-size:11px;color:var(--text-secondary);line-height:1.4;">
+              Strict RBAC prevents agent prompt injections from invoking unauthorized tools or execution environments.
+            </p>
+          </div>
+          <div style="background:var(--bg-surface-elevated);padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);">
+            <div style="font-weight:700;color:var(--color-gold);font-size:12px;margin-bottom:4px;">Multi-Tier Validation</div>
+            <p style="font-size:11px;color:var(--text-secondary);line-height:1.4;">
+              Intermediate computations pass JSON schema and numerical bounds checks before final report synthesis.
+            </p>
+          </div>
+          <div style="background:var(--bg-surface-elevated);padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);">
+            <div style="font-weight:700;color:var(--status-success);font-size:12px;margin-bottom:4px;">Self-Healing Retries</div>
+            <p style="font-size:11px;color:var(--text-secondary);line-height:1.4;">
+              Transient execution faults trigger automatic re-planning with error context injection and exponential backoff.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/workflow.js"></script>
+  <script src="js/evaluation.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
